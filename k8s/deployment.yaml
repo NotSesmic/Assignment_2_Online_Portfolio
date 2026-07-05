@@ -30,7 +30,7 @@ spec:
 
           env:
             - name: MANAGEMENT_GRAPHITE_METRICS_EXPORT_HOST
-              value: "graphite"
+              value: "172.18.0.4"
             - name: MANAGEMENT_GRAPHITE_METRICS_EXPORT_PORT
               value: "2003"
 
