@@ -1,0 +1,55 @@
+{
+  "title": "Portfolio Website - Resource Utilization",
+  "uid": "portfolio-website",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "refresh": "10s",
+  "time": { "from": "now-30m", "to": "now" },
+  "panels": [
+    {
+      "id": 1,
+      "title": "JVM heap used per pod",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "target": "aliasByNode(jvm.memory.used.application.portfolio.area.heap.id.*.pod.*, 8)"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Process CPU usage per pod",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "fieldConfig": { "defaults": { "unit": "percentunit", "max": 1, "min": 0 } },
+      "targets": [
+        {
+          "target": "aliasByNode(system.cpu.usage.application.portfolio.pod.*, 4)"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Live JVM threads per pod",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "targets": [
+        {
+          "target": "aliasByNode(jvm.threads.live.application.portfolio.pod.*, 4)"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Pod uptime (seconds)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "targets": [
+        {
+          "target": "aliasByNode(process.uptime.application.portfolio.pod.*, 4)"
+        }
+      ]
+    }
+  ]
+}

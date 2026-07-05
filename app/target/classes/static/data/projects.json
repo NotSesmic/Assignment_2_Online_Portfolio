@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Aurora Skincare",
+    "category": "E-commerce",
+    "image": "https://picsum.photos/seed/aurora/600/400",
+    "description": "Full storefront redesign with a focus on product photography and fast checkout."
+  },
+  {
+    "title": "Northbound Coffee",
+    "category": "Brand + Web",
+    "image": "https://picsum.photos/seed/northbound/600/400",
+    "description": "Brand identity and a single-page site for a specialty coffee roaster."
+  },
+  {
+    "title": "Fernwood Studio",
+    "category": "Portfolio",
+    "image": "https://picsum.photos/seed/fernwood/600/400",
+    "description": "Minimal architecture studio portfolio with a case-study driven layout."
+  },
+  {
+    "title": "Lumen Fitness",
+    "category": "Landing Page",
+    "image": "https://picsum.photos/seed/lumen/600/400",
+    "description": "High-conversion landing page for a boutique fitness studio launch."
+  }
+]

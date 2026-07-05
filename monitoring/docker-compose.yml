@@ -1,0 +1,62 @@
+version: "3.8"
+
+services:
+
+  # Metrics store — receives pushes from the app's graphiteClient.js
+  # over the plaintext Carbon protocol (port 2003), and serves them
+  # up as time series that Grafana queries.
+  graphite:
+    image: graphiteapp/graphite-statsd:latest
+    container_name: graphite
+    restart: unless-stopped
+    ports:
+      - "8081:80"     # Graphite's own web UI (rarely needed once Grafana is up)
+      - "2003:2003"   # Carbon plaintext receiver — the app writes here
+      - "2004:2004"   # Carbon pickle receiver (unused, kept for completeness)
+      - "8125:8125/udp" # StatsD receiver (unused unless you add statsd clients)
+    networks:
+      - monitoring
+
+  # Dashboards — reads from Graphite, provisioned automatically so
+  # the dashboard shows up the moment the stack starts.
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    depends_on:
+      - graphite
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_AUTH_ANONYMOUS_ENABLED=false
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    networks:
+      - monitoring
+
+  # Availability checks — actively probes the website's /health
+  # endpoint (via check_http) and alerts on failure. This is
+  # independent of the app itself: if the app is fully down,
+  # Nagios still notices.
+  nagios:
+    image: jasonrivers/nagios:latest
+    container_name: nagios
+    restart: unless-stopped
+    ports:
+      - "8082:80"
+    # /opt/nagios/etc/conf.d is auto-included by the base image's
+    # default nagios.cfg (cfg_dir directive) — dropping files here
+    # avoids having to replace nagios.cfg itself.
+    volumes:
+      - ./nagios/conf.d:/opt/nagios/etc/conf.d
+    networks:
+      - monitoring
+      - kind   # lets this container resolve kind-control-plane by name
+
+networks:
+  monitoring:
+    driver: bridge
+  kind:
+    external: true   # created by `kind create cluster`, not by this compose file
