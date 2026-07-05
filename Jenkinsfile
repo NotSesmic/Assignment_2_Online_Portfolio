@@ -92,13 +92,13 @@ pipeline {
     }
 }   
 
-        stage('Deploy to Kubernetes') {
-            steps {
-                echo "Deploying application to Kubernetes..."
-                sh 'kubectl apply -f k8s/deployment.yaml'
-                sh 'kubectl apply -f k8s/service.yaml'
-            }
-        }
+stage('Deploy to Kubernetes') {
+    steps {
+        sh 'kubectl config use-context kind-portfolio-website'
+        sh 'kubectl apply -f k8s/deployment.yaml'
+        sh 'kubectl apply -f k8s/service.yaml'
+    }
+}
 
         stage('Verify Deployment') {
             steps {
