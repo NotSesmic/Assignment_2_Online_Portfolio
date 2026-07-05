@@ -13,7 +13,7 @@
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
       "targets": [
         {
-          "target": "aliasByNode(jvm.memory.used.application.portfolio.area.heap.id.*.pod.*, 8)"
+          "target": "seriesByTag('name=jvm.memory.used', 'application=portfolio', 'area=heap')"
         }
       ]
     },
@@ -25,7 +25,7 @@
       "fieldConfig": { "defaults": { "unit": "percentunit", "max": 1, "min": 0 } },
       "targets": [
         {
-          "target": "aliasByNode(system.cpu.usage.application.portfolio.pod.*, 4)"
+          "target": "seriesByTag('name=system.cpu.usage', 'application=portfolio')"
         }
       ]
     },
@@ -36,7 +36,7 @@
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
       "targets": [
         {
-          "target": "aliasByNode(jvm.threads.live.application.portfolio.pod.*, 4)"
+          "target": "seriesByTag('name=jvm.threads.live', 'application=portfolio')"
         }
       ]
     },
@@ -47,7 +47,7 @@
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
       "targets": [
         {
-          "target": "aliasByNode(process.uptime.application.portfolio.pod.*, 4)"
+          "target": "seriesByTag('name=process.uptime', 'application=portfolio')"
         }
       ]
     }
