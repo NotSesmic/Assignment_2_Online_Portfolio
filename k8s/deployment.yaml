@@ -20,13 +20,13 @@ spec:
       containers:
         - name: portfolio-website
 
-          image: portfolio-website:v1
+          image: portfolio-website:latest
 
           imagePullPolicy: IfNotPresent
 
           ports:
-            - containerPort: 8080   # app
-            - containerPort: 9090   # actuator
+            - containerPort: 8080 # app
+            - containerPort: 9090 # actuator
 
           env:
             - name: MANAGEMENT_GRAPHITE_METRICS_EXPORT_HOST
