@@ -2,11 +2,6 @@ pipeline {
 
     agent any
 
-    tools {
-        jdk 'JDK21'
-        maven 'Maven-3.9.16'
-    }
-
     environment {
         IMAGE_NAME = "portfolio-website"
         IMAGE_TAG  = "v1"
